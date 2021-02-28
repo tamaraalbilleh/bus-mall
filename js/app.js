@@ -97,6 +97,7 @@ function handleClick (event){
   }
   if (Product.counter === clickCounter){
     document.getElementById('resultViewer').style.visibility = 'visible';
+    section.removeEventListener ('click', handleClick);
   }
 }
 
@@ -121,9 +122,12 @@ document.getElementById('resultViewer').addEventListener('click', function() {
     liElement.textContent = (`${products[u]} had ${Product.all[u].clicks} votes, and was seen ${Product.all[u].shawn} times.`);
 
   }
+
   if (buttonClick >= 1){
     document.getElementById('resultViewer').style.visibility = 'hidden';
   }
 
 });
+
+
 
