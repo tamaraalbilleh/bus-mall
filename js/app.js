@@ -107,10 +107,11 @@ function randomNumber( min, max ) {
 }
 
 
-
+let buttonClick = 0 ;
 
 renderProduct ();
 document.getElementById('resultViewer').addEventListener('click', function() {
+  buttonClick = buttonClick +1;
   const container = document.getElementById ('result-section');
   const ulElement =document.createElement ('ul');
   container.appendChild (ulElement);
@@ -120,4 +121,9 @@ document.getElementById('resultViewer').addEventListener('click', function() {
     liElement.textContent = (`${products[u]} had ${Product.all[u].clicks} votes, and was seen ${Product.all[u].shawn} times.`);
 
   }
+  if (buttonClick >= 1){
+    document.getElementById('resultViewer').style.visibility = 'hidden';
+  }
+
 });
+
