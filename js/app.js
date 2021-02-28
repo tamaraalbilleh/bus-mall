@@ -110,3 +110,14 @@ function randomNumber( min, max ) {
 
 
 renderProduct ();
+document.getElementById('resultViewer').addEventListener('click', function() {
+  const container = document.getElementById ('result-section');
+  const ulElement =document.createElement ('ul');
+  container.appendChild (ulElement);
+  for (let u = 0 ; u < products.length ; u++){
+    const liElement = document.createElement ('li');
+    ulElement.appendChild (liElement);
+    liElement.textContent = (`${products[u]} had ${Product.all[u].clicks} votes, and was seen ${Product.all[u].shawn} times.`);
+
+  }
+});
