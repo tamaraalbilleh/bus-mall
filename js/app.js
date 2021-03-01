@@ -6,6 +6,7 @@ let clickCounter = 25;
 let leftProductIndex =0;
 let middleProductIndex= 0;
 let rightProductIndex  =0;
+let currentImage = [];
 const section = document.getElementById ('image-section');
 const leftImage = document.getElementById ('leftImage');
 const middleImage = document.getElementById ('middleImage');
@@ -24,8 +25,8 @@ function Product (name) {
   }
   this.clicks = 0 ;
   this.shawn = 0 ;
-  this.valid = true ;
   Product.all.push(this);
+
 }
 
 
@@ -46,43 +47,51 @@ function renderProduct (){
 
   let middleIndex ;
   let rightIndex ;
-
+  let leftIndex;
   //left image randomization//
+  for (let r = 0 ; r < clickCounter ; r++){
+    while ((leftIndex || middleIndex || rightIndex ) === currentImage [r-3] ){
+      leftIndex = randomNumber( 0,Product.all.length - 1 );
 
-  let leftIndex = randomNumber( 0,Product.all.length - 1 );
-  leftImage.src = Product.all[leftIndex].img;
-  leftImage.alt = Product.all[leftIndex].name;
-  leftProductIndex = leftIndex;
+      leftImage.src = Product.all[leftIndex].img;
+      leftImage.alt = Product.all[leftIndex].name;
+      leftProductIndex = leftIndex;
 
-  //middle image randomization //
+      //middle image randomization //
 
-  do {
-    middleIndex = randomNumber(0,Product.all.length -1);
-  } while (leftIndex === middleIndex || middleIndex === rightIndex);
+      do {
+        middleIndex = randomNumber(0,Product.all.length -1);
+      } while (leftIndex === middleIndex || middleIndex === rightIndex);
 
-  middleImage.src = Product.all[middleIndex].img;
-  middleImage.alt = Product.all[middleIndex].name;
-  middleProductIndex = middleIndex;
+      middleImage.src = Product.all[middleIndex].img;
+      middleImage.alt = Product.all[middleIndex].name;
+      middleProductIndex = middleIndex;
 
-  //right image randomization //
+      //right image randomization //
 
-  do {
-    rightIndex = randomNumber (0,Product.all.length -1);
-  } while (leftIndex === rightIndex || rightIndex === middleIndex);
-  rightImage.src = Product.all[rightIndex].img;
-  rightImage.alt = Product.all[rightIndex].name;
-  rightProductIndex = rightIndex;
+      do {
+        rightIndex = randomNumber (0,Product.all.length -1);
+      } while (leftIndex === rightIndex || rightIndex === middleIndex);
 
-  // shawn counters for each image //
-  Product.all[leftIndex].shawn++;
-  Product.all[middleIndex].shawn++;
-  Product.all[rightIndex].shawn++;
+      rightImage.src = Product.all[rightIndex].img;
+      rightImage.alt = Product.all[rightIndex].name;
+      rightProductIndex = rightIndex;
 
-
+      // shawn counters for each image //
+      Product.all[leftIndex].shawn++;
+      Product.all[middleIndex].shawn++;
+      Product.all[rightIndex].shawn++;
+    }
+  }
 }
 function handleClick (event){
-  if (Product.counter < clickCounter){
-    const clickedElement = event.target;
+  const clickedElement = event.target;
+  if (Product.counter === clickCounter){
+
+    document.getElementById('resultViewer').style.visibility = 'visible';
+    section.removeEventListener ('click', handleClick);
+  }
+  if (Product.counter < clickCounter-1){
     if (clickedElement.id === 'leftImage' || clickedElement.id === 'middleImage' || clickedElement.id === 'rightImage'){
       if (clickedElement.id === 'leftImage'){
         Product.all[leftProductIndex].clicks++;
@@ -111,8 +120,13 @@ function randomNumber( min, max ) {
 
 
 let buttonClick = 0 ;
+///// data arrays for the chart ////
 let data1 = [];
 let data2 = [];
+///////////////////////////////////
+
+
+
 renderProduct ();
 document.getElementById('resultViewer').addEventListener('click', function() {
   buttonClick = buttonClick +1;
@@ -205,13 +219,14 @@ document.getElementById('resultViewer').addEventListener('click', function() {
       }
     }
   });
-  
 
   if (buttonClick >= 1){
     document.getElementById('resultViewer').style.visibility = 'hidden';
   }
 
 });
+
+
 
 
 
