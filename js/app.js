@@ -57,7 +57,7 @@ function renderProduct (){
   leftImage.src = Product.all[leftIndex].img;
   leftImage.alt = Product.all[leftIndex].name;
   leftProductIndex = leftIndex;
-  // lastSet.push (leftIndex);
+  lastSet.push (leftIndex);
 
   //middle image randomization //
 
@@ -68,7 +68,7 @@ function renderProduct (){
   middleImage.src = Product.all[middleIndex].img;
   middleImage.alt = Product.all[middleIndex].name;
   middleProductIndex = middleIndex;
-  // lastSet.push (middleIndex);
+  lastSet.push (middleIndex);
   //right image randomization //
 
   do {
@@ -77,7 +77,7 @@ function renderProduct (){
   rightImage.src = Product.all[rightIndex].img;
   rightImage.alt = Product.all[rightIndex].name;
   rightProductIndex = rightIndex;
-  // lastSet.push (rightIndex);
+  lastSet.push (rightIndex);
   // shawn counters for each image //
   Product.all[leftIndex].shawn++;
   Product.all[middleIndex].shawn++;
@@ -122,11 +122,11 @@ function randomNumber( min, max ) {
   for (let f = 0 ; f < lastSet.length ; f++){
     if (indexNumber === lastSet[f]){
       indexNumber = Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-      if (lastSet.length <3 ){
-        lastSet.push (indexNumber);
-      }else if (lastSet.length > 3){
-        lastSet=[];
-      }
+      // if (lastSet.length <3 ){
+      //   lastSet.push (indexNumber);
+      // }else if (lastSet.length > 3){
+      //   lastSet=[];
+      // }
     }
   }
   
