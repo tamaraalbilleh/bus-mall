@@ -40,14 +40,17 @@ Product.counter = 0;
 for (let i =0;i<products.length;i++){
   new Product (products[i]);
 }
-console.log (Product.all);
+// console.log (Product.all);
 
 ///// array to hold last shown set of images /////
 let lastSet = [];
 /////////////////////////////////////////////////
 
 function renderProduct (){
-
+  lastSet = [];
+  if (Product.counter >0){
+    lastSet= [leftProductIndex,middleProductIndex,rightProductIndex];
+  }
   let middleIndex ;
   let rightIndex ;
 
@@ -82,8 +85,8 @@ function renderProduct (){
   Product.all[leftIndex].shawn++;
   Product.all[middleIndex].shawn++;
   Product.all[rightIndex].shawn++;
-  console.log (lastSet);
-  // lastSet = [];
+
+
 }
 
 function handleClick (event){
@@ -108,6 +111,7 @@ function handleClick (event){
 
     renderProduct ();
     // console.log (lastSet);
+
   }
   if (Product.counter === clickCounter){
     document.getElementById('resultViewer').style.visibility = 'visible';
@@ -119,17 +123,14 @@ section.addEventListener ('click', handleClick);
 
 function randomNumber( min, max ) {
   let indexNumber = Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+  console.log (lastSet);
   for (let f = 0 ; f < lastSet.length ; f++){
+
     if (indexNumber === lastSet[f]){
       indexNumber = Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-      // if (lastSet.length <3 ){
-      //   lastSet.push (indexNumber);
-      // }else if (lastSet.length > 3){
-      //   lastSet=[];
-      // }
+
     }
   }
-  
   return (indexNumber);
 }
 
